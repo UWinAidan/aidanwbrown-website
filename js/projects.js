@@ -241,7 +241,7 @@ const PROJECTS = [
       'The site runs on Cloudflare and deploys itself every time I push to GitHub. A small Worker handles the contact form and serves the CAD downloads from separate storage, and a build step makes small copies of the photos and models so pages load fast.',
       'I wrote the simpler pages myself to learn, and worked with an AI assistant (Claude) on the more complex parts such as the 3D viewer.',
     ],
-    links: [] },
+    links: [{ label: 'GitHub', url: 'https://github.com/UWinAidan/aidanwbrown-website' }] },
 
   { id: 'canoe', title: 'Canoe Build', year: '2025',
     tags: ['Woodworking', 'Personal project'],
