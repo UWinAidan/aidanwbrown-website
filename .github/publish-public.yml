@@ -1,0 +1,53 @@
+# Keeps the public copy of this repo (github.com/UWinAidan/aidanwbrown-website) up to date.
+# Every push to main copies the approved files across - see scripts/publish-public.mjs for the list and the
+# privacy check. If the check finds anything, this job fails and nothing is published.
+name: Publish public copy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-public
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'UWinAidan/aidanwbrown.com'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v4
+
+      - name: Check out the public repo
+        uses: actions/checkout@v4
+        with:
+          repository: UWinAidan/aidanwbrown-website
+          ssh-key: ${{ secrets.PUBLIC_REPO_DEPLOY_KEY }}
+          path: public
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Copy approved files (and run the privacy check)
+        env:
+          MESSAGE: ${{ github.event.head_commit.message }}
+        run: node scripts/publish-public.mjs --out public --message "$MESSAGE" > commit-message.txt
+
+      - name: Commit and push if anything changed
+        working-directory: public
+        run: |
+          git config user.name "Aidan Brown"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -F ../commit-message.txt
+          git push

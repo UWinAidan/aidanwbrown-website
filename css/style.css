@@ -1,0 +1,1442 @@
+/* ---------- Fonts (kept on this site in fonts/, so pages don't wait on Google) ---------- */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {   /* accented letters outside the basic set - only downloaded if a page uses one */
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/inter-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/bebas-neue-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/bebas-neue-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- Colours ---------- */
+:root {
+  --bg: #1a1c1d;
+  --surface: #2a2e2f;
+  --text: #ebe9e4;
+  --muted: #7e8583;
+  --accent: #a9b8a4;
+  --highlight: #c5d1bf;
+  --want: #d9b779;   /* "want to go" pins, "In progress" badges */
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f1f0ec;
+  --surface: #ffffff;
+  --text: #1f2321;
+  --muted: #6f7672;
+  --accent: #5f735c;
+  --highlight: #4a5d47;
+  --want: #a8741f;
+  color-scheme: light;
+}
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Page ---------- */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* ---------- Header / nav ---------- */
+.site-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: auto;
+}
+
+.pill {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.pill:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.pill-cta {
+  background-color: var(--highlight);
+  border-color: var(--highlight);
+  color: var(--bg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+}
+
+.theme-toggle svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon-sun { display: none; }
+[data-theme="light"] .icon-sun { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.name {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: clamp(5rem, 18vw, 16rem);
+  line-height: 0.85;
+}
+
+.name-first {
+  position: absolute;
+  left: 2rem;
+  top: 12%;
+  z-index: 1;          /* back layer */
+}
+
+.hero-photo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 90%;
+  z-index: 2;          /* middle layer */
+}
+
+.name-last {
+  position: absolute;
+  right: 2rem;
+  bottom: 4%;
+  z-index: 3;          /* front layer */
+}
+
+.tagline {
+  position: absolute;
+  right: 2rem;
+  top: auto;
+  bottom: 0.6rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-align: right;
+  font-weight: 300;
+  z-index: 3;
+}
+
+/* ---------- Mobile menu ---------- */
+.menu-toggle {
+  display: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.mobile-menu a {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open .mobile-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---------- Landing page: no scrolling ---------- */
+body.landing {
+  height: 100vh;
+  height: 100dvh;
+  height: var(--app-height, 100dvh);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  min-height: 0;
+}
+
+body.landing .hero {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+
+/* ---------- Landing entrance animation ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+body.landing .name-first  { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both; }
+body.landing .name-last   { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s both; }
+body.landing .hero-photo  { animation: fade 1.1s ease 0.35s both; }
+body.landing .site-header { animation: fade 0.8s ease 0.6s both; }
+body.landing .tagline     { animation: fade 0.8s ease 0.8s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  body.landing * {
+    animation: none !important;
+  }
+}
+
+/* ---------- Contact card ---------- */
+.contact-card {
+  margin: auto;
+  width: min(28rem, calc(100% - 2rem));
+  padding: 2rem;
+  border: none;
+  border-radius: 1.25rem;
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+.contact-card[open] {
+  animation: fade 0.25s ease;
+}
+
+.contact-card::backdrop {
+  background: rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.contact-card h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.contact-note {
+  color: var(--muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background-color: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 0.75rem;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+}
+
+.send-btn {
+  padding: 0.7rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.form-status {
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+
+.form-status.success { color: var(--accent); }
+.form-status.error   { color: #e07a6b; }
+
+.contact-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.contact-divider::before,
+.contact-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--muted);
+  opacity: 0.4;
+}
+
+.email-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.4rem 0.4rem 0.4rem 1rem;
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+}
+
+.email-address {
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: clamp(0.8rem, 3.6vw, 0.95rem);
+}
+
+.copy-btn {
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dialog-close:hover {
+  color: var(--text);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .site-header {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .pill {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  .name {
+    font-size: 28vw;
+  }
+
+  .name-first {
+    left: 1rem;
+    top: 4%;
+  }
+
+  .name-last {
+    right: 1rem;
+    bottom: 3%;
+    text-shadow: 0 0 2rem var(--bg);
+  }
+
+  .hero-photo {
+    height: 84%;
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 95%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 95%);
+  }
+
+  .tagline {
+    left: 1rem;
+    right: auto;
+    top: calc(4% + 24vw);
+    text-align: left;
+    font-size: 0.85rem;
+  }
+
+  .tag-sep {
+    display: none;
+  }
+
+  .tag-line2 {
+    display: block;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+  }
+}
+
+/* ---------- Inner pages (everything except the landing page) ---------- */
+body:not(.landing) .site-header {
+  position: sticky;
+  top: 0;
+  background-color: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.pill[aria-current="page"] {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.page {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+  animation: fade 0.6s ease both;
+}
+
+.page-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: clamp(4rem, 14vw, 8rem);
+  line-height: 0.9;
+  color: var(--accent);
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 1rem;
+}
+
+/* ---------- Resume content ---------- */
+.docx {
+  line-height: 1.6;
+}
+
+.docx.is-loading {
+  color: var(--muted);
+}
+
+.docx h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 2.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 40%, transparent);
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.entry-head h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.entry-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.docx ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.docx li {
+  margin-bottom: 0.3rem;
+}
+
+.docx li::marker {
+  color: var(--accent);
+}
+
+.li-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 1rem;
+}
+/* phones: About page facts as two tidy columns (a long value wraps in its own column, not under the label) */
+@media (max-width: 600px) {
+  .about .li-row { display: grid; grid-template-columns: 6.25rem 1fr; }
+  .about .li-row .date { white-space: normal; }
+}
+
+/* ---------- Home button (AB mark) ---------- */
+.home-link {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: 0.75rem;
+  background-color: var(--accent);
+  -webkit-mask: url("../images/mark.svg") center / contain no-repeat;
+  mask: url("../images/mark.svg") center / contain no-repeat;
+  transition: background-color 0.2s;
+}
+
+.home-link:hover {
+  background-color: var(--text);
+}
+
+/* ---------- About page ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 1.25rem;
+  background-color: var(--surface);
+}
+
+.about .docx > p {
+  margin-bottom: 1rem;
+}
+
+.about .docx > p:first-child {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.about .docx h2 {
+  margin-top: 1.5rem;
+}
+
+/* ---------- Socials page ---------- */
+.page-intro {
+  color: var(--muted);
+  margin: 0.5rem 0 2rem;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.social-card {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--muted) 40%, transparent);
+  border-radius: 1.25rem;
+  background-color: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.social-name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.social-handle {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.social-arrow {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.social-card:hover .social-arrow {
+  color: var(--accent);
+}
+
+/* ---------- One-screen pages: <body class="one-screen"> ----------
+   On a desktop-sized window the page is exactly as tall as the window, so there is nothing to scroll:
+   the photo banner gives up height first and the footer sits at the bottom.
+   Phones and narrow windows keep the normal scrolling layout. If the window is too short for everything
+   (or more is added to the page later), it simply scrolls as usual - nothing is ever cut off. */
+@media (min-width: 800px) and (min-height: 520px) {
+  body.one-screen { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+  body.one-screen .site-header { flex: none; }
+  body.one-screen .page-banner { flex: 0 1 clamp(200px, 34vh, 380px); height: auto; min-height: 8.5rem; }
+  body.one-screen .page-banner .page-title { font-size: clamp(4rem, min(14vw, 18vh), 8rem); }
+  body.one-screen .page { flex: 1 0 auto; width: 100%; padding-bottom: 1.5rem; }
+  body.one-screen .page-intro { margin-bottom: 1.5rem; }
+  body.one-screen .site-footer { flex: none; padding: 1rem 1.5rem 1.25rem; }
+}
+
+@media (max-width: 700px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo {
+    width: 12rem;
+  }
+}
+
+/* ---------- Page banner (random photo on each visit) ---------- */
+.page-banner {
+  position: relative;
+  height: clamp(200px, 34vh, 380px);
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) saturate(0.8);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.banner-img.loaded {
+  opacity: 1;
+}
+
+/* fade the bottom of the photo into the page background */
+.page-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--bg) 100%);
+}
+
+.page-banner .page-title {
+  position: absolute;
+  z-index: 1;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(50rem, 100%);
+  padding: 0 1.5rem;
+}
+
+.page-banner + .page {
+  padding-top: 1rem;
+}
+
+/* ---------- Responsive fixes (nav, mobile menu, contact card) ---------- */
+
+/* Switch to the Menu button whenever the pill row would not fit
+   (not just on phones - tablets and small laptops too) */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+  }
+}
+
+/* Mobile menu: links shrink to fit the screen height, and scroll if they ever can't */
+.mobile-menu {
+  justify-content: safe center;
+  overflow-y: auto;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+}
+
+.mobile-menu a {
+  font-size: clamp(2rem, calc((100svh - 8rem) / 10), 4.5rem);
+}
+
+/* Contact card: keep the Cloudflare check centred and inside the card */
+.cf-turnstile {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form > * {
+  min-width: 0;
+}
+
+.dialog-close:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .contact-card {
+    width: calc(100% - 1rem);
+    padding: 1.5rem 1rem;
+  }
+
+  /* 16px+ stops iPhones from zooming in when you tap a field */
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+}
+
+/* ---------- Music page ---------- */
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1.5rem;
+}
+
+.music-frame {
+  position: relative;
+  height: 352px;
+  overflow: hidden;
+  background: var(--surface);
+  border-radius: 12px;
+}
+
+.music-card iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* the stand-in shown while Spotify's player loads (js/music.js). The player sits on top of it and is see-through
+   until Spotify draws something, so it takes over the moment it can; then the stand-in is switched off. */
+.music-card.loaded .music-wait { display: none; }
+.music-wait { position: absolute; inset: 0; padding: 1rem; }
+.music-wait-top { display: flex; gap: 1rem; align-items: flex-end; margin-bottom: 1.25rem; }
+.music-wait-cover { flex: none; width: 7.5rem; aspect-ratio: 1; overflow: hidden; border-radius: 8px; background: color-mix(in srgb, var(--accent) 30%, var(--surface)); }
+.music-wait-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.music-wait-text { min-width: 0; }
+.music-wait-text b { display: block; font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 1.7rem; line-height: 1.05; color: var(--text); }
+.music-wait-text small { color: var(--muted); font-size: 0.8rem; }
+.music-wait i { display: block; height: 0.7rem; margin-top: 1.05rem; border-radius: 999px; background: color-mix(in srgb, var(--muted) 22%, transparent); animation: music-wait 1.4s ease-in-out infinite alternate; }
+.music-wait i:nth-of-type(2) { width: 82%; animation-delay: 0.15s; }
+.music-wait i:nth-of-type(3) { width: 90%; animation-delay: 0.3s; }
+.music-wait i:nth-of-type(4) { width: 70%; animation-delay: 0.45s; }
+@keyframes music-wait { from { opacity: 0.45; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .music-wait i { animation: none; } }
+
+.music-card figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Travels page ---------- */
+.page-wide { max-width: 64rem; }
+
+.travel-quote { margin: 0.5rem 0 2rem; max-width: 40rem; }
+.travel-quote q { font-size: 1.1rem; line-height: 1.6; font-style: italic; }
+.travel-quote cite { display: block; margin-top: 0.4rem; color: var(--muted); font-style: normal; font-size: 0.85rem; }
+
+.map-legend { display: flex; gap: 1.25rem; margin-bottom: 0.75rem; color: var(--muted); font-size: 0.85rem; }
+
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.legend-dot.been { background: var(--accent); }
+.legend-dot.want { border: 2px solid var(--want); }
+
+.map-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border-radius: 1.25rem;
+}
+
+#map { display: block; width: 100%; height: auto; cursor: grab; touch-action: none; }
+#map:active { cursor: grabbing; }
+
+/* silhouette style: soft land, lakes cut out */
+#map .land { fill: color-mix(in srgb, var(--muted) 35%, var(--surface)); }
+#map .lakes { fill: var(--surface); }
+
+/* pins */
+.pin { cursor: pointer; outline: none; }
+.pin .halo { fill: transparent; }
+.pin .dot { transition: r 0.15s; }
+.pin.been .dot { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.pin.want .dot { fill: var(--surface); stroke: var(--want); stroke-width: 2.5; }
+.pin.been .halo { fill: var(--accent); opacity: 0; animation: pin-pulse 2.4s ease-out infinite; }
+.pin:hover .dot, .pin:focus-visible .dot { r: 7; }
+
+@keyframes pin-pulse {
+  0%   { opacity: 0.45; r: 5; }
+  100% { opacity: 0;    r: 16; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pin.been .halo { animation: none; }
+}
+
+.map-zoom { position: absolute; top: 12px; right: 12px; display: grid; gap: 6px; }
+.map-zoom button {
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--muted) 50%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.map-zoom button:hover { border-color: var(--accent); }
+
+/* hover card */
+#map-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 240px;
+  overflow: hidden;
+  background: var(--bg);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+#map-card.show { opacity: 1; }
+#map-card img { display: block; width: 100%; height: 140px; object-fit: cover; }
+#map-card .card-body { display: grid; gap: 3px; padding: 10px 12px; font-size: 0.85rem; }
+#map-card b { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 1.5rem; line-height: 1; color: var(--accent); }
+#map-card .region { color: var(--muted); }
+#map-card .coords { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.75rem; color: var(--muted); }
+#map-card .hint { font-size: 0.75rem; color: var(--accent); }
+
+/* lists under the map */
+.place-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
+.place-lists h2 { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 2rem; color: var(--accent); }
+.place-lists ul { margin-top: 0.5rem; list-style: none; padding: 0; }
+.place-lists button {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0;
+  font: inherit;
+  color: var(--text);
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 25%, transparent);
+  cursor: pointer;
+}
+.place-lists button:hover { color: var(--accent); }
+.place-lists small { display: block; margin-left: 1.2rem; color: var(--muted); font-size: 0.8rem; }
+.place-lists .empty { color: var(--muted); padding: 0.55rem 0; }
+
+@media (max-width: 700px) {
+  .place-lists { grid-template-columns: 1fr; }
+}
+
+/* place page (place.html?id=...) */
+/* "Back to..." on project, place and simulator pages: a clear button, not small grey text */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 0.4rem 1rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+.back-link:hover { color: var(--bg); background-color: var(--accent); }
+.place-meta { color: var(--muted); font-size: 0.9rem; }
+.place-coords { font-family: ui-monospace, Menlo, Consolas, monospace; }
+.place-blurb { margin: 0.75rem 0 1.5rem; }
+.gallery { columns: 2 14rem; column-gap: 0.75rem; }
+.gallery img { display: block; width: 100%; height: auto; margin-bottom: 0.75rem; border-radius: 0.75rem; break-inside: avoid; }
+.gallery a { display: block; break-inside: avoid; cursor: zoom-in; }   /* each photo links to its full-size original */
+
+/* long place names need a smaller banner title */
+.page-banner:has(+ #place) .page-title { font-size: clamp(3rem, 9vw, 6rem); }
+
+@media (max-width: 600px) {
+  .map-zoom { top: auto; bottom: 8px; right: 8px; display: flex; }
+  .map-zoom button { padding: 3px 8px; font-size: 11px; }
+}
+
+/* ---------- Portfolio + Designs: shared card grid ---------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.5rem;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  font: inherit;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.work-card:hover,
+.work-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.work-cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  /* placeholder until a photo is added */
+  background:
+    url("../images/favicon.svg") center / 18% no-repeat,
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 35%, var(--surface)), var(--surface));
+}
+.work-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.work-card:hover .work-cover img { transform: scale(1.04); }
+
+.badge-3d {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.work-body { padding: 1rem 1.15rem 1.25rem; }
+.work-card h2,
+.viewer-info h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.work-meta { margin-top: 0.3rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.02em; }
+.work-summary { margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.5; }
+
+/* ---------- Project page (project.html?id=...) ---------- */
+.page-banner:has(+ #project) .page-title { font-size: clamp(3rem, 9vw, 6rem); width: min(70rem, 100%); }
+#project { max-width: 70rem; }
+.project-info > .work-meta { margin: 0 0 1.25rem; font-size: 0.9rem; line-height: 1.55; }
+
+/* The first screen: the summary on the left, the project itself on the right (js/project.js fills the showcase) */
+.project-top { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: 2rem; align-items: start; margin-bottom: 2.5rem; }
+.project-top.no-showcase { grid-template-columns: minmax(0, 46rem); }   /* nothing to show yet: just the text */
+.project-lead { margin-bottom: 1.25rem; font-size: 1.2rem; line-height: 1.5; }
+/* under the summary: "On this page" (jumps) and "Links" (other sites), two lists side by side */
+.project-go { display: flex; flex-wrap: wrap; gap: 1rem 2.25rem; margin-top: 1.6rem; }
+.project-go:not(:has(a)) { display: none; }
+.project-info .project-nav, .project-info .project-links { display: flex; flex-direction: column; flex-wrap: nowrap; gap: 0.35rem; margin: 0; }
+.project-info .project-nav:empty, .project-info .project-links:empty { display: none; }
+.project-info .project-nav::before, .project-info .project-links::before { content: "On this page"; margin-bottom: 0.3rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.project-info .project-links::before { content: "Links"; }
+.project-info .project-nav:not(:empty) + .project-links { padding-left: 2.25rem; border-left: 1px solid color-mix(in srgb, var(--muted) 40%, transparent); }
+/* (the padding and the matching negative margin give the highlight room without moving the text) */
+.jump-link, .out-link { width: fit-content; margin: -0.2rem -0.65rem; padding: 0.2rem 0.65rem; border-radius: 999px; font-size: 0.95rem; color: var(--text); text-decoration: none; transition: color 0.2s, background-color 0.2s; }
+.jump-link::before { content: "\2193"; display: inline-block; width: 1.25em; color: var(--accent); transition: transform 0.2s; }   /* down arrow */
+.out-link::after { content: "\2197"; display: inline-block; margin-left: 0.3em; color: var(--accent); transition: transform 0.2s; }   /* up-right arrow */
+/* pointer over it (or reached with the keyboard): highlighted row, and the arrow nudges the way the link goes */
+.jump-link:hover, .out-link:hover, .jump-link:focus-visible, .out-link:focus-visible { color: var(--bg); background-color: var(--accent); }   /* same as the Back button */
+.jump-link:hover::before, .out-link:hover::after, .jump-link:focus-visible::before, .out-link:focus-visible::after { color: var(--bg); }
+.jump-link:hover::before, .jump-link:focus-visible::before { transform: translateY(3px); }
+.out-link:hover::after, .out-link:focus-visible::after { transform: translate(2px, -2px); }
+/* up to three tiles: one large on the left, two stacked on the right */
+.project-showcase { display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.6rem; height: clamp(18rem, 46vh, 26rem); }
+.project-showcase[data-tiles="2"] { grid-template-rows: 1fr; }
+.project-showcase[data-tiles="1"] { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.showcase-tile { position: relative; overflow: hidden; min-width: 0; min-height: 0; border-radius: 1rem; background: var(--surface); }
+.showcase-tile.is-big { grid-row: 1 / -1; }
+.showcase-tile > a { display: block; height: 100%; cursor: zoom-in; }
+.showcase-tile img, .showcase-tile video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.showcase-tile > a img { transition: transform 0.4s ease; }
+.showcase-tile > a:hover img { transform: scale(1.03); }
+.showcase-clip { background: #000; }
+/* the 3D model: outlined in the accent colour with a clear button, so it reads as something to open */
+.showcase-model { border: 1.5px solid var(--accent); background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 16%, var(--surface)), var(--surface) 75%); animation: model-ring 2.4s ease-out 0.8s 3; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.showcase-model:hover { transform: translateY(-3px); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+.showcase-model .work-card { display: block; width: 100%; height: 100%; border: 0; border-radius: 0; background: none; transform: none; }
+.showcase-model .work-cover { position: absolute; inset: 0; aspect-ratio: auto; background: none; }
+.showcase-model .work-cover img { object-fit: contain; padding: 0.6rem 0.6rem 2.6rem; }
+.showcase-model .work-body { display: none; }
+.model-cta { position: absolute; left: 50%; bottom: 0.6rem; transform: translateX(-50%); padding: 0.3rem 0.9rem; font-size: 0.8rem; font-weight: 500; white-space: nowrap; color: var(--bg); background: var(--accent); border-radius: 999px; pointer-events: none; }
+@keyframes model-ring { from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } to { box-shadow: 0 0 0 12px transparent; } }
+@media (prefers-reduced-motion: reduce) { .showcase-model { animation: none; } }
+/* phones: one column, with the showcase straight after the summary (before the jump buttons and links) */
+@media (max-width: 800px) {
+  .project-top { display: flex; flex-direction: column; gap: 0; }
+  .project-info { display: contents; }
+  .project-info > .back-link { align-self: flex-start; }
+  .project-showcase { order: 1; height: clamp(15rem, 68vw, 24rem); margin-bottom: 1.25rem; }
+  .project-info > .project-go { order: 2; margin-top: 0; }
+  .model-cta { font-size: 0.7rem; padding: 0.25rem 0.6rem; }
+  .showcase-model .work-cover img { padding-bottom: 2.2rem; }
+  .project-showcase { align-self: stretch; }   /* always the full width, even with a single tile */
+  /* a wide first photo: full width on top in its own shape, the other tiles in a row under it */
+  .project-showcase[data-shape="wide"] { grid-template-columns: 1fr 1fr; grid-template-rows: auto; height: auto; }
+  .project-showcase[data-shape="wide"] .is-big { grid-column: 1 / -1; grid-row: auto; aspect-ratio: var(--big-ratio, 16 / 9); }
+  .project-showcase[data-shape="wide"] .showcase-tile:not(.is-big) { aspect-ratio: 4 / 3; }
+  .project-showcase[data-shape="wide"][data-tiles="2"] .showcase-tile:not(.is-big) { grid-column: 1 / -1; aspect-ratio: 5 / 2; }
+}
+.project-writeup .project-body { max-width: 46rem; }
+#project .gallery { columns: 3 15rem; }
+/* only one or two photos left over: centred, instead of filling just the left-hand columns */
+@media (min-width: 700px) {
+  #project .gallery:not(:has(> :nth-child(3))) { columns: 2; max-width: 66.6%; margin-inline: auto; }
+  #project .gallery:has(> :is(a, video):only-child) { columns: 1; max-width: 50%; }
+  .gallery:has(> a:only-child) { columns: 1; max-width: 50%; margin-inline: auto; }   /* (place pages too) */
+}
+.project-body p { margin-bottom: 1rem; line-height: 1.7; }
+.project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.25rem 0 1.75rem; }
+.project-links:empty { display: none; }
+
+/* ---------- Designs: 3D viewer dialog ---------- */
+.viewer {
+  margin: auto;
+  width: min(60rem, calc(100% - 2rem));
+  padding: 0;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--surface);
+  border: none;
+  border-radius: 1.25rem;
+}
+.viewer[open] { display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: minmax(0, 1fr); animation: fade 0.25s ease; }
+.viewer::backdrop { background: rgb(0 0 0 / 0.6); backdrop-filter: blur(4px); }
+.viewer .dialog-close { z-index: 2; }
+
+.viewer-stage {
+  position: relative;
+  min-height: 24rem;
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 12%, var(--bg)), var(--bg) 75%);
+}
+.viewer-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.viewer-stage canvas:active { cursor: grabbing; }
+.viewer-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.viewer-info { padding: 2rem 1.5rem 1.5rem; overflow-y: auto; }
+@media (max-height: 520px) { .viewer-stage { min-height: 0; } }
+.viewer-info h2 { font-size: 2.6rem; padding-right: 1.5rem; }
+.viewer-info .project-links { margin: 1.25rem 0 0; }
+.viewer-hint { margin-top: 1.5rem; color: var(--muted); font-size: 0.75rem; }
+
+/* phones: the model on top, the text under it. The model area is square when there is room and gives up height
+   first when there isn't, so it never covers the text; very long text scrolls inside the card. */
+@media (max-width: 700px) {
+  .viewer[open] { display: flex; flex-direction: column; max-height: calc(100vh - 1.5rem); max-height: calc(100dvh - 1.5rem); }
+  .viewer-stage { flex: 0 1000 auto; height: calc(100vw - 2rem); min-height: 13rem; }
+  .viewer-info { flex: 0 1 auto; min-height: 0; padding: 1.25rem; overflow-y: auto; }
+}
+
+/* linked designs */
+.work-from { margin-top: 0.6rem; color: var(--accent); font-size: 0.8rem; }
+.project-models { margin-top: 2.5rem; }
+.section-title { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 2.2rem; color: var(--accent); margin-bottom: 0.75rem; }
+
+/* design cards: rendered model snapshot */
+.work-cover.rendered {
+  background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--accent) 14%, var(--bg)), var(--bg) 80%);
+}
+
+/* viewer: configuration toggle (only when a design has 2+ files) */
+.viewer-configs {
+  position: absolute;
+  left: 50%;
+  bottom: 0.9rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--muted) 35%, transparent);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.viewer-configs:empty { display: none; }
+.viewer-configs button {
+  padding: 0.35rem 0.9rem;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.viewer-configs button:hover { color: var(--text); }
+.viewer-configs button[aria-pressed="true"] { color: var(--bg); background: var(--accent); }
+.viewer-configs button:disabled { opacity: 0.45; cursor: progress; }   /* a configuration that is still loading */
+.viewer-configs button:disabled::after { content: " …"; }
+
+/* project page: documents & code */
+.project-files { margin: 2rem 0; }
+.file-list { list-style: none; padding: 0; }
+.file-list li {
+  display: grid;
+  grid-template-columns: 3.6rem 1fr auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 25%, transparent);
+}
+.file-kind {
+  padding: 0.15rem 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-radius: 0.4rem;
+}
+.file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-size { color: var(--muted); font-size: 0.8rem; }
+.file-actions { display: flex; gap: 0.4rem; }
+.file-actions .pill { padding: 0.25rem 0.75rem; font-size: 0.8rem; }
+@media (max-width: 600px) {
+  .file-list li { grid-template-columns: 3.6rem 1fr; }
+  .file-size { display: none; }
+  .file-actions { grid-column: 2; }
+}
+
+/* code viewer */
+.code-view {
+  margin: auto;
+  width: min(56rem, calc(100% - 2rem));
+  max-height: 85vh;
+  padding: 1.25rem 0 0;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--surface);
+  border: none;
+  border-radius: 1.25rem;
+}
+.code-view[open] { display: flex; flex-direction: column; animation: fade 0.25s ease; }
+.code-view::backdrop { background: rgb(0 0 0 / 0.6); backdrop-filter: blur(4px); }
+.code-name { padding: 0 3rem 0.75rem 1.25rem; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85rem; color: var(--accent); }
+.code-view pre {
+  overflow: auto;
+  margin: 0;
+  padding: 1rem 0;
+  background: var(--bg);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  counter-reset: line;
+}
+.code-view code span { display: block; padding: 0 1.25rem 0 0; white-space: pre; }
+.code-view code span::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 3.2rem;
+  margin-right: 1rem;
+  padding-right: 0.75rem;
+  text-align: right;
+  color: var(--muted);
+  opacity: 0.6;
+  border-right: 1px solid color-mix(in srgb, var(--muted) 30%, transparent);
+  user-select: none;
+}
+
+/* viewer: reset view + 3/4 section buttons */
+.viewer-tools {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  display: flex;
+  gap: 0.4rem;
+}
+.viewer-tools button {
+  padding: 0.3rem 0.75rem;
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--muted) 35%, transparent);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.viewer-tools button:hover { border-color: var(--accent); }
+/* three tool buttons: wrap onto a second row instead of running under the close button on a phone */
+.viewer-tools { right: 3.4rem; flex-wrap: wrap; }
+.viewer-tools button[aria-pressed="true"] { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+
+/* "In progress" badge (cards) + note (viewer) */
+.badge-status {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1a1c1d;
+  background: var(--want);
+  border-radius: 999px;
+}
+.viewer-note {
+  margin-top: 0.9rem;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  background: color-mix(in srgb, var(--want) 14%, transparent);
+  border-left: 3px solid var(--want);
+  border-radius: 0.4rem;
+}
+.viewer-note:empty { display: none; }
+.status-pill {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #1a1c1d;
+  background: var(--want);
+  border-radius: 999px;
+  vertical-align: 1px;
+}
+
+/* ---------- Footer + licence line ---------- */
+.site-footer {
+  padding: 2rem 1.5rem 2.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+/* phones: room for the back-to-top button, so it doesn't sit on the footer text */
+@media (max-width: 600px) { .site-footer { padding-bottom: 4.75rem; } }
+.viewer-license { margin-top: 0.9rem; color: var(--muted); font-size: 0.75rem; }
+.viewer-license:empty { display: none; }
+/* project pages: the rights line under Documents & code, and the owner line at the bottom of a team project */
+.rights-note, .project-rights { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+.rights-note { margin-top: 0.75rem; }
+.project-rights { margin-top: 2.5rem; }
+.rights-note:empty, .project-rights:empty { display: none; }
+
+/* project videos */
+.project-videos { display: grid; gap: 1rem; margin: 1.5rem 0; }
+.project-videos iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 0.75rem; background: var(--surface); }
+.gallery video { display: block; width: 100%; margin-bottom: 0.75rem; border-radius: 0.75rem; break-inside: avoid; background: #000; }
+
+/* ---------- Project page layout ---------- */
+#project section { margin: 2rem 0; scroll-margin-top: 5.5rem; }   /* clear the sticky header when jumping */
+html { scroll-behavior: smooth; }
+
+/* 3D model cards sit near the top, so keep them compact: picture left, text right */
+.project-models .work-grid { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1rem; }
+.project-models .work-card { flex-direction: row; align-items: stretch; }
+.project-models .work-cover { flex: 0 0 42%; aspect-ratio: 4 / 3; }
+.project-models .work-body { padding: 0.8rem 1rem; align-self: center; }
+.project-models .work-card h2 { font-size: 1.5rem; }
+.project-models .work-summary { font-size: 0.85rem; margin-top: 0.35rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.project-models .badge-status { font-size: 0.6rem; }
+
+/* ---------- "Kind of work" chips (types: in js/projects.js) ---------- */
+.work-types { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.55rem; }
+.work-types span {
+  padding: 0.1rem 0.55rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+}
+.project-info > .work-types { margin: -0.6rem 0 1.25rem; }
+
+/* ---------- Portfolio: sections + the jump buttons at the top ---------- */
+.section-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.25rem; }
+.work-section { margin-bottom: 3.25rem; scroll-margin-top: 5.5rem; }   /* (clear the sticky header when jumping) */
+.work-section > h2 {
+  margin-bottom: 1rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* ---------- Back to top button (added by js/main.js) ---------- */
+.to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 15;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition: opacity 0.25s, transform 0.25s, background-color 0.2s, color 0.2s;
+}
+.to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+.to-top:hover { color: var(--bg); background: var(--accent); }

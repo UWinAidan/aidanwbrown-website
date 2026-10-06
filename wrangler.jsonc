@@ -1,0 +1,46 @@
+// Cloudflare Worker config for aidanwbrown.com
+// The site is mostly static files; the Worker script only handles /api/* (the contact form)
+// and /cad/* (the STEP downloads, which live in an R2 bucket instead of this repo).
+{
+  "name": "aidanwbrown-com",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+
+  // Before each deploy: make the file lists and (--deploy) the small copies that speed the site up
+  // (scripts/list-banners.mjs and scripts/small-copies.mjs)
+  "build": {
+    "command": "node scripts/list-banners.mjs --deploy"
+  },
+
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*", "/cad/*"]
+  },
+
+  // The real domains the site lives on (the free workers.dev test address stays off)
+  "routes": [
+    { "pattern": "aidanwbrown.com", "custom_domain": true },
+    { "pattern": "www.aidanwbrown.com", "custom_domain": true }
+  ],
+  "workers_dev": false,
+
+  // The STEP downloads live in this R2 bucket (no 25 MB limit there). The bucket must exist before a deploy.
+  // To upload: put the file in cad/<design-id>/ and run  node scripts/sync-cad.mjs
+  "r2_buckets": [
+    { "binding": "CAD", "bucket_name": "aidanwbrown-cad" }
+  ],
+
+  // Lets the Worker send email - but ONLY to this verified address (your inbox)
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_destination_addresses": ["you@example.com"]
+    }
+  ],
+
+  // Keep logs so we can see errors if the contact form ever fails
+  "observability": {
+    "enabled": true
+  }
+}

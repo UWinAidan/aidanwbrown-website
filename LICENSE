@@ -1,0 +1,14 @@
+Copyright (c) 2026 Aidan Brown. All rights reserved.
+
+This repository is published so that people can view and learn from the code behind
+https://aidanwbrown.com.
+
+You may read the code and link to it. You may not copy, modify, redistribute, sell, or
+use it (or anything derived from it) in your own projects or products without written
+permission.
+
+Third-party libraries in js/vendor/ are not covered by this notice. They remain under
+their own open-source licences: three.js (MIT), D3 (ISC), topojson-client (ISC) and
+Mammoth (BSD-2-Clause).
+
+For permission or questions: contact@aidanwbrown.com

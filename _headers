@@ -1,0 +1,62 @@
+# How long a browser may keep each kind of file before asking the site for a newer one.
+#
+# - Pages (.html), the lists (.json) and the files you edit for content (js/projects.js, js/designs-list.js,
+#   js/places.js, the Word files) are checked EVERY time, so new content shows straight away.
+# - css and the other js: kept for 5 minutes. After changing one of those, the old version can show for up to
+#   5 minutes - Ctrl+F5 gets the new one at once.
+# - photos, models, map data: kept for an hour, then shown from the copy while a fresh one is fetched.
+#   Replacing a photo under the same name can take a visit or two to show (Ctrl+F5 for you).
+# - js/vendor and fonts never change under the same name. If a vendor file is ever rebuilt, RENAME it.
+#
+# ("! Cache-Control" clears the rule above it for that path, so only one value is sent.)
+
+/css/*
+  Cache-Control: public, max-age=300
+
+/js/*
+  Cache-Control: public, max-age=300
+
+/js/projects.js
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/js/designs-list.js
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/js/places.js
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/js/vendor/*
+  ! Cache-Control
+  Cache-Control: public, max-age=604800
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800
+
+/images/*.json
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/models/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800
+
+/models/*.json
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/data/*
+  Cache-Control: public, max-age=86400
+
+/files/files.json
+  Cache-Control: no-cache
+
+/resume/*
+  Cache-Control: no-cache
+
+/about/*
+  Cache-Control: no-cache

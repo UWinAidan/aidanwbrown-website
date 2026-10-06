@@ -1,0 +1,20 @@
+# Files that should NOT be published as part of the website
+.git
+.gitignore
+.gitattributes
+.assetsignore
+wrangler.jsonc
+worker
+README.md
+Claude outputs
+.wrangler
+node_modules
+TODO.md
+scripts
+_README.md
+_TODO.md
+testing files
+cad
+.vscode
+.github
+public-repo

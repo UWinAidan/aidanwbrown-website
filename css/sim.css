@@ -1,0 +1,78 @@
+/* ---------- Trebuchet simulator (js/trebuchet-sim.js) ----------
+   Loaded only by trebuchet-sim.html and by the trebuchet project page. Uses the site colours from style.css. */
+:root { --sim-line: rgb(235 233 228 / 0.14); --sim-cw: #d9b779; --sim-ball: #e58a6b; --sim-sling: #9aa3a0; }
+[data-theme="light"] { --sim-line: rgb(31 35 33 / 0.14); --sim-cw: #a8741f; --sim-ball: #c2573a; --sim-sling: #7c8481; }
+
+.sim { font-size: 0.95rem; line-height: 1.5; }
+.sim-panel { background: var(--surface); border-radius: 1.25rem; padding: 1.1rem 1.25rem; min-width: 0; }
+.sim h3 { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.7rem; }
+.sim canvas { display: block; width: 100%; }
+.sim-view { aspect-ratio: 4.4 / 3.3; }
+.sim-traj { aspect-ratio: 3.6 / 1; min-height: 190px; }
+.sim-chart { aspect-ratio: 2.1 / 1; min-height: 190px; }
+
+/* the numbers */
+.sim-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; }
+.sim-stat { background: var(--surface); border-radius: 1.25rem; padding: 1rem 1.25rem; min-width: 0; }
+.sim-stat .k { font-size: 0.78rem; color: var(--muted); }
+.sim-stat .v { font-family: "Bebas Neue", sans-serif; font-size: 2.4rem; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.sim-stat .v small { font-family: "Inter", system-ui, sans-serif; font-size: 0.85rem; color: var(--muted); }
+.sim-stat .n { font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sim-stat.main .v { color: var(--accent); }
+
+/* layout */
+.sim-grid { display: grid; gap: 0.9rem; margin-top: 0.9rem; }
+.sim-two { grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); }
+.sim-half { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sim-compact { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 0.9rem; align-items: start; }
+.sim-compact .sim-stats { grid-template-columns: 1fr; gap: 0.6rem; }
+.sim-compact .sim-stat { padding: 0.8rem 1.1rem; }
+.sim-compact .sim-controls { background: var(--surface); border-radius: 1.25rem; padding: 1rem 1.1rem 0.6rem; margin-top: 0.6rem; }
+.sim-compact .sim-side .sim-bar { margin-top: 0.75rem; }
+
+/* sliders */
+.sim-group { margin-top: 0.9rem; }
+.sim-group:first-child { margin-top: 0; }
+.sim-group > p { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.35rem; }
+.sim-row { display: grid; grid-template-columns: 1fr auto; gap: 0 0.5rem; align-items: baseline; margin-bottom: 0.5rem; }
+.sim-row label, .sim-row output { font-size: 0.86rem; }
+.sim-row output { font-weight: 500; font-variant-numeric: tabular-nums; }
+.sim-row.changed output { color: var(--sim-cw); }
+.sim-row input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+
+/* buttons, time line, legends */
+.sim-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.7rem; }
+.sim-bar .pill { font-family: inherit; cursor: pointer; }
+.sim-bar button.pill { background: transparent; }
+.sim-speed { font: inherit; font-size: 0.85rem; color: var(--text); background: transparent; border: 1px solid var(--muted); border-radius: 999px; padding: 0.3rem 0.7rem; cursor: pointer; }
+.sim-speed option { background: var(--surface); color: var(--text); }
+.sim-scrub { flex: 1; min-width: 8rem; accent-color: var(--accent); }
+.sim-time { font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sim-full .sim-time { min-width: 13rem; }
+.sim-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
+.sim-legend i { display: inline-block; width: 1.1rem; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 0.35rem; }
+.sim-legend i.dash { border-top-style: dashed; }
+.sim :is(button, select, input, a):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* tables */
+.sim table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.sim td { padding: 0.3rem 0; border-top: 1px solid var(--sim-line); font-variant-numeric: tabular-nums; }
+.sim tr:first-child td { border-top: 0; }
+.sim td b { color: var(--muted); font-weight: 500; }
+.sim td:last-child { text-align: right; font-weight: 500; white-space: nowrap; padding-left: 0.8rem; }
+.sim tr.head td { color: var(--muted); font-weight: 400; }
+.sim-warn { color: var(--sim-cw); font-size: 0.86rem; margin-top: 0.6rem; }
+.sim-fail { background: var(--surface); border-left: 3px solid var(--sim-cw); border-radius: 0.5rem; padding: 0.7rem 1rem; margin-top: 0.9rem; }
+.sim [hidden] { display: none; }
+
+.project-sim { margin-top: 2.5rem; }
+/* the simulator page: a long title, so it's sized to stay on one line and lines up with the wide page below it */
+.page-banner:has(+ #simulator) .page-title { width: min(64rem, 100%); font-size: clamp(2rem, 8.5vw, 6rem); }
+.project-sim .page-intro { margin-bottom: 1rem; }
+
+@media (max-width: 760px) {
+  .sim-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sim-two, .sim-half, .sim-compact { grid-template-columns: minmax(0, 1fr); }
+  .sim-compact .sim-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sim-full .sim-time { min-width: 0; }
+}

@@ -1,0 +1,10 @@
+Copyright (c) {YEAR} Aidan Brown. All rights reserved.
+
+Design: {TITLE}
+Source: https://aidanwbrown.com/designs.html#{ID}
+
+These CAD files are shared so you can view, measure and learn from the design.
+You may not copy, modify, redistribute, sell, or use them (or anything made from
+them) in your own projects or products without written permission.
+
+For permission or questions: contact@aidanwbrown.com
