@@ -37,7 +37,7 @@ I'm Aidan Brown, a Mechatronics Engineering student at the University of Windsor
 - **This is a public copy.** I work in a private repo, and a GitHub Action copies an approved list of files into this one on every push (`scripts/publish-public.mjs`, `.github/publish-public.yml`). Before anything is copied, a privacy check scans it, so personal details can't end up here by accident.
 - **Photos, 3D models, CAD files, reports and the Word documents are not included.** Some of them show other people or belong to my robotics teams. A clone of this repo shows the page layouts, but without the content. To see the full site, visit [aidanwbrown.com](https://aidanwbrown.com).
 - **The contact address** in `worker/index.js` and `wrangler.jsonc` is a placeholder.
-- **Built with an AI assistant.** I wrote the simpler pages myself to learn, and worked with an AI coding assistant (Claude Code and Claude Cloud) on the more complex parts, such as the 3D viewer and the build scripts. Some code comments are notes to myself or to the assistant ("ask Claude to…"), and I've left them as they are.
+- **Built with an AI assistant.** I wrote the simpler pages myself to learn, and worked with an AI coding assistant (Claude Code and Claude Cowork) on the more complex parts, such as the 3D viewer and the build scripts. Some code comments are notes to myself or to the assistant ("ask Claude to…"), and I've left them as they are.
 
 ## Licence
 

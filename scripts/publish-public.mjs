@@ -48,6 +48,7 @@ const SWAPS = [
 // ---------- 3. Privacy check ----------
 const ALWAYS = [
   { name: 'Gmail address', re: /gmail\.com/i },
+  { name: 'university email address', re: /uwindsor\.ca/i },
 ];
 // Numbers that look like the patterns below but are already public on the site
 const KNOWN_OK = [
