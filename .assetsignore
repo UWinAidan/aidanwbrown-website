@@ -18,3 +18,11 @@ cad
 .vscode
 .github
 public-repo
+
+# Claude Code / ContextKeeper files (keep these off the live site)
+.claude
+CLAUDE.md
+_STATUS.md
+_DECISIONS.md
+STATUS.md
+DECISIONS.md
