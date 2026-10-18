@@ -1,0 +1,38 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" prompt 2>/dev/null || python \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" prompt 2>/dev/null || py \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" prompt",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" stop 2>/dev/null || python \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" stop 2>/dev/null || py \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" stop",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" start 2>/dev/null || python \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" start 2>/dev/null || py \"$CLAUDE_PROJECT_DIR/.claude/hooks/contextkeeper.py\" start",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
